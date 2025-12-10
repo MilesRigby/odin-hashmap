@@ -54,15 +54,10 @@ const HashMap = () => {
 
     }
 
-    // Adds a key-value pair to the hashmap, or replaces the value of an existing key
-    // Needs update to resize map on high load factor
-    function set(key, value) {
+    // Internal function to retrieve a node from a bucket by its key
+    function _searchBucketByKey(bucket, key) {
 
-        // Determine the hash for the requested key
-        let hash = _hash(key);
-
-        // Get the bucket the hash refers to, and its head node
-        let bucket = _accessBucket(hash);
+        // Get the head node of the bucket
         let node = bucket.getHead();
 
         // Search bucket for a node with the requested key
@@ -71,26 +66,67 @@ const HashMap = () => {
             // Retrieve the key-value pair stored on the current node
             let kvPair = node.value;
 
-            // If the node's kvPair has the requested key, replace the kvPair's value with the new value and return from the set() function
-            if ( key === kvPair.key ) { kvPair.value = value; return; }
+            // If the node's kvPair has the requested key, return the node
+            if ( key === kvPair.key ) { return node; }
 
             // Otherwise, continue to the next node
             node = node.next;
 
         }
+        
+        // If key is not found, return null
+        return null;
 
-        // If key did not already exist, append the requested key and value as a key-value pair to the bucket
-        bucket.append({
-            key: key,
-            value: value
-        });
+    }
+
+    // Adds a key-value pair to the hashmap, or replaces the value of an existing key
+    // !!! NEEDS UPDATE to resize map on high load factor !!!
+    function set(key, value) {
+
+        // Determine the hash for the requested key
+        let hash = _hash(key);
+
+        // Get the bucket the hash refers to, and its head node
+        let bucket = _accessBucket(hash);
+
+        // Find the bucket node with the requested key, if it exists
+        let node = _searchBucketByKey(bucket, key);
+
+        // If a node with the requested key already exists, replace its key-value pair's value with the new value
+        if (node) { node.value.value = value; }
+
+        // If no node with the requested key exists, append the new key-value pair to the bucket
+        else {
+            bucket.append({
+                key: key,
+                value: value
+            });
+        }
+
+    }
+
+    // Searches the hashmap for a node with
+    function get(key) {
+
+        // Determine the hash for the requested key
+        let hash = _hash(key);
+
+        // Get the bucket the hash refers to, and its head node
+        let bucket = _accessBucket(hash);
+
+        // Find the bucket node with the requested key, if it exists
+        let node = _searchBucketByKey(bucket, key);
+
+        // If a node with the requested key exists, return its key-value pair's value, otherwise return null
+        if (node) { return node.value.value; }
+        else      { return null; }
 
     }
 
     // Initialise hashmap
     _map = _createHashMap(_capacity);
 
-    return { set };
+    return { set, get };
 
 }
 
