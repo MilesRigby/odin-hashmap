@@ -101,6 +101,9 @@ const HashMap = () => {
                 key: key,
                 value: value
             });
+
+            // If the bucket was previously empty, increase _used by 1 - a new bucket is now in use
+            if ( bucket.size() === 1 ) { _used++; }
         }
 
     }

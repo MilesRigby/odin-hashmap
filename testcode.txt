@@ -1,0 +1,37 @@
+const map = HashMap();
+
+map.set("Number", 20);
+map.set("Numbr", 20);
+map.set("Numbe", 20);
+map.set("Numer", 20);
+map.set("Nmber", 20);
+map.set("umber", 20);
+map.set("Numb", 20);
+map.set("Numr", 20);
+map.set("Nuer", 20);
+map.set("Nber", 20);
+map.set("mber", 20);
+map.set("Num", 20);
+map.set("Nur", 20);
+map.set("Ner", 20);
+map.set("ber", 20);
+map.set("Nu", 20);
+map.set("Nr", 20);
+
+map.set("Number", 1);
+map.set("Numbr", 2);
+map.set("Numbe", 3);
+map.set("Numer", 4);
+map.set("Nmber", 5);
+map.set("umber", 6);
+map.set("Numb", 7);
+map.set("Numr", 8);
+map.set("Nuer", 9);
+map.set("Nber", 10);
+map.set("mber", 11);
+map.set("Num", 12);
+map.set("Nur", 12);
+map.set("Ner", 13);
+map.set("ber", 14);
+map.set("Nu", 15);
+map.set("Nr", 16);
