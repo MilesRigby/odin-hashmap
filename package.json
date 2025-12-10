@@ -1,0 +1,24 @@
+{
+  "name": "odin-hashmap",
+  "version": "1.0.0",
+  "description": "An implementation of a hash map made as part of The Odin Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MilesRigby/odin-hashmap.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MilesRigby/odin-hashmap/issues"
+  },
+  "homepage": "https://github.com/MilesRigby/odin-hashmap#readme",
+  "devDependencies": {
+    "webpack": "^5.103.0",
+    "webpack-cli": "^6.0.1"
+  }
+}
