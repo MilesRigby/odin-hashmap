@@ -1,6 +1,6 @@
 import HashMap from "./hashmap.js";
 
-let map = HashMap();
+const map = HashMap();
 
 map.set("Number", 1);
 map.set("Numbr", 2);
@@ -31,31 +31,45 @@ map.set("Nmbr", 26);
 map.set("Nmbe", 27);
 
 console.log(
-map.get("Number"),
-map.get("Numbr"),
-map.get("Numbe"),
-map.get("Numer"),
-map.get("Nmber"),
-map.get("umber"),
-map.get("Numb"),
-map.get("Numr"),
-map.get("Nuer"),
-map.get("Nber"),
-map.get("mber"),
-map.get("Num"),
-map.get("Nur"),
-map.get("Ner"),
-map.get("ber"),
-map.get("Nu"),
-map.get("Nr"),
-map.get("er"),
-map.get("N"),
-map.get("r"),
-map.get("uber"),
-map.get("umer"),
-map.get("umbr"),
-map.get("umbe"),
-map.get("Nmer"),
-map.get("Nmbr"),
-map.get("Nmbe"),
+    map.get("Number"),
+    map.get("Numbr"),
+    map.get("Numbe"),
+    map.get("Numer"),
+    map.get("Nmber"),
+    map.get("umber"),
+    map.get("Numb"),
+    map.get("Numr"),
+    map.get("Nuer"),
+    map.get("Nber"),
+    map.get("mber"),
+    map.get("Num"),
+    map.get("Nur"),
+    map.get("Ner"),
+    map.get("ber"),
+    map.get("Nu"),
+    map.get("Nr"),
+    map.get("er"),
+    map.get("N"),
+    map.get("r"),
+    map.get("uber"),
+    map.get("umer"),
+    map.get("umbr"),
+    map.get("umbe"),
+    map.get("Nmer"),
+    map.get("Nmbr"),
+    map.get("Nmbe"),
+);
+
+console.log(
+    map.has("Number"),
+    map.has("Numbe"),
+    map.has("Numbr"),
+    map.has("Numer"),
+    map.has("Nuber"),
+    map.has("Nmber"),
+    map.has("umber"),
+    map.has("mbe"),
+    map.has("Nbe"),
+    map.has("Nue"),
+    map.has("Nmr"),
 );

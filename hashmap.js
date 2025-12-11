@@ -1,4 +1,3 @@
-// Testing functionality of imported function
 import createLinkedList from "./linkedlist.js";
 
 const HashMap = () => {
@@ -31,12 +30,8 @@ const HashMap = () => {
     // Checks if the loadLimit has been reached, and resizes the hash table if so, doubling in size each time
     function checkResize() {
 
-        console.log(_loadFactor()); // TESTCODE DELETE
-
         // return immediately if not enough buckets have elements
         if ( _loadFactor() < _loadLimit ) { return; }
-
-        for (let i = 0; i < _capacity; i++) { console.log(_map[i].toString()); } // TESTCODE DELETE
 
         // reset _used to 0
         _used = 0;
@@ -69,8 +64,6 @@ const HashMap = () => {
             let kvPair = kvPairs[i];
             set(kvPair.key, kvPair.value);
         }
-
-        for (let i = 0; i < _capacity; i++) { console.log(_map[i].toString()); } // TESTCODE DELETE
 
     }
 
@@ -125,6 +118,20 @@ const HashMap = () => {
 
     }
 
+    // Retrieves a node using its key. Exists because this code was copied in multiple functions 
+    function _getNodeByKey(key) {
+
+        // Determine the hash for the requested key
+        let hash = _hash(key);
+
+        // Get the bucket the hash refers to, and its head node
+        let bucket = _accessBucket(hash);
+
+        // Find the bucket node with the requested key, if it exists
+        return _searchBucketByKey(bucket, key);
+
+    }
+
     // Adds a key-value pair to the hashmap, or replaces the value of an existing key
     // !!! NEEDS UPDATE to resize map on high load factor !!!
     function set(key, value) {
@@ -160,14 +167,8 @@ const HashMap = () => {
     // Searches the hashmap for a node with
     function get(key) {
 
-        // Determine the hash for the requested key
-        let hash = _hash(key);
-
-        // Get the bucket the hash refers to, and its head node
-        let bucket = _accessBucket(hash);
-
-        // Find the bucket node with the requested key, if it exists
-        let node = _searchBucketByKey(bucket, key);
+        // Search for an existing node with the requested key
+        let node = _getNodeByKey(key);
 
         // If a node with the requested key exists, return its key-value pair's value, otherwise return null
         if (node) { return node.value.value; }
@@ -175,10 +176,13 @@ const HashMap = () => {
 
     }
 
+    // Checks if a key exists in the hashmap by checking if a node containing the key exists (_getNodeByKey() does not return null)
+    function has(key) { return (_getNodeByKey(key) !== null); }
+
     // Initialise hashmap
     _map = _createHashMap();
 
-    return { set, get };
+    return { set, get, has };
 
 }
 
