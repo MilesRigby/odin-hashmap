@@ -7,7 +7,7 @@ const HashMap = () => {
     let _map;
 
     // Current number of buckets in the hashmap and number of filled buckets
-    let _capacity = 16;
+    let _capacity = 2
     let _used = 0;
 
     // calculate the loadFactor as the proportion of buckets containing >0 elements
@@ -17,14 +17,60 @@ const HashMap = () => {
     const _loadLimit = 0.75;
 
     // Creates a hashmap object of a given size
-    function _createHashMap(size) {
+    function _createHashMap() {
 
         let newMap = [];
 
         // Add linked lists to the map such that it is of the correct size
-        for (let i=0; i<size; i++) { newMap.push(createLinkedList()); }
+        for (let i=0; i<_capacity; i++) { newMap.push(createLinkedList()); }
 
         return newMap;
+
+    }
+
+    // Checks if the loadLimit has been reached, and resizes the hash table if so, doubling in size each time
+    function checkResize() {
+
+        console.log(_loadFactor()); // TESTCODE DELETE
+
+        // return immediately if not enough buckets have elements
+        if ( _loadFactor() < _loadLimit ) { return; }
+
+        for (let i = 0; i < _capacity; i++) { console.log(_map[i].toString()); } // TESTCODE DELETE
+
+        // reset _used to 0
+        _used = 0;
+
+        // Set up list of all key-value pairs
+        let kvPairs = [];
+
+        // Loop over current hashmap, and retrieve all entries
+        for (let i = 0; i < _capacity; i++) {
+
+            // Get head node from bucket
+            let node = _map[i].getHead();
+
+            // Loop through linked list, retrieving all nodes
+            while (node) {
+                kvPairs.push(node.value);
+                node = node.next;
+            }
+
+        }
+
+        // Double _capacity to track proportion of new map's buckets in use
+        _capacity *= 2;
+
+        // Reinitialise hashmap with the new capacity
+        _map = _createHashMap();
+
+        // Use set() to rehash all kv pairs and place them in the map
+        for (let i = 0; i<kvPairs.length; i++) {
+            let kvPair = kvPairs[i];
+            set(kvPair.key, kvPair.value);
+        }
+
+        for (let i = 0; i < _capacity; i++) { console.log(_map[i].toString()); } // TESTCODE DELETE
 
     }
 
@@ -102,8 +148,11 @@ const HashMap = () => {
                 value: value
             });
 
-            // If the bucket was previously empty, increase _used by 1 - a new bucket is now in use
-            if ( bucket.size() === 1 ) { _used++; }
+            // If the bucket was previously empty, increase _used by 1 - a new bucket is now in use - and resize if needed
+            if ( bucket.size() === 1 ) { 
+                _used++;
+                checkResize();
+            }
         }
 
     }
@@ -127,7 +176,7 @@ const HashMap = () => {
     }
 
     // Initialise hashmap
-    _map = _createHashMap(_capacity);
+    _map = _createHashMap();
 
     return { set, get };
 
