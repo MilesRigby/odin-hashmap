@@ -28,6 +28,8 @@ map.set("Nmer", 25);
 map.set("Nmbr", 26);
 map.set("Nmbe", 27);
 
+console.log(map.keys(), "\n", map.values(), "\n", map.entries());
+
 console.log(
     map.get("Number"),
     map.get("Numbr"),
@@ -70,4 +72,75 @@ console.log(
     map.has("Nbe"),
     map.has("Nue"),
     map.has("Nmr"),
+);
+
+console.log(map.length());
+
+console.log(
+    map.remove("Number"),
+    map.remove("Number"),
+    map.remove("Numbe"),
+    map.remove("Numbe"),
+    map.remove("Numbr"),
+    map.remove("Numbr"),
+    map.remove("Numer"),
+    map.remove("Numer"),
+    map.remove("Nuber"),
+    map.remove("Nuber"),
+    map.remove("Nmber"),
+    map.remove("Nmber"),
+    map.remove("umber"),
+    map.remove("umber"),
 )
+
+console.log(map.keys(), "\n", map.values(), "\n", map.entries());
+
+console.log(map.length());
+
+console.log(
+    map.remove("mr"),
+    map.remove("mb"),
+    map.remove("Nm"),
+    map.remove("br"),
+    map.remove("Ne"),
+);
+
+console.log(map.keys(), "\n", map.values(), "\n", map.entries());
+
+console.log(map.length());
+
+console.log(
+    map.get("Number"),
+    map.get("Numbr"),
+    map.get("Numbe"),
+    map.get("Numer"),
+    map.get("Nmber"),
+    map.get("umber"),
+    map.get("Numb"),
+    map.get("Numr"),
+    map.get("Nuer"),
+    map.get("Nber"),
+    map.get("mber"),
+    map.get("Num"),
+    map.get("Nur"),
+    map.get("Ner"),
+    map.get("ber"),
+    map.get("Nu"),
+    map.get("Nr"),
+    map.get("er"),
+    map.get("N"),
+    map.get("r"),
+    map.get("uber"),
+    map.get("umer"),
+    map.get("umbr"),
+    map.get("umbe"),
+    map.get("Nmer"),
+    map.get("Nmbr"),
+    map.get("Nmbe"),
+);
+
+map.clear();
+
+console.log(map.keys(), "\n", map.values(), "\n", map.entries());
+
+console.log(map.length());

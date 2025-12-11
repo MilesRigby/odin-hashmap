@@ -33,17 +33,9 @@ const HashMap = () => {
 
     }
 
-    // Checks if the loadLimit has been reached, and resizes the hash table if so, doubling in size each time
-    function checkResize() {
+    // Reusable function for retrieving all {key, value} objects stored in the hash map
+    function _getKvPairs() {
 
-        // return immediately if not enough buckets have elements
-        if ( _loadFactor() < _loadLimit ) { return; }
-
-        // reset _used and _length to 0
-        _used = 0;
-        _length = 0;
-
-        // Set up list of all key-value pairs
         let kvPairs = [];
 
         // Loop over current hashmap, and retrieve all entries
@@ -59,6 +51,23 @@ const HashMap = () => {
             }
 
         }
+
+        return kvPairs;
+
+    }
+
+    // Checks if the loadLimit has been reached, and resizes the hash table if so, doubling in size each time
+    function _checkResize() {
+
+        // return immediately if not enough buckets have elements
+        if ( _loadFactor() < _loadLimit ) { return; }
+
+        // reset _used and _length to 0
+        _used = 0;
+        _length = 0;
+
+        // Set up list of all key-value pairs
+        let kvPairs = _getKvPairs();
 
         // Double _capacity to track proportion of new map's buckets in use
         _capacity *= 2;
@@ -167,7 +176,7 @@ const HashMap = () => {
             // If the bucket was previously empty, increase _used by 1 - a new bucket is now in use - and resize if needed
             if ( bucket.size() === 1 ) { 
                 _used++;
-                checkResize();
+                _checkResize();
             }
 
         }
@@ -227,10 +236,55 @@ const HashMap = () => {
         _map = _createHashMap();
     }
 
+    // Returns an array containing all keys in the hashmap
+    function keys() {
+
+        // Array of kv pair objects {key, value}
+        let kvPairs = _getKvPairs();
+
+        // Array of keys
+        let keys = [];
+
+        // Extract just the keys to the keys array
+        for (let i=0; i<kvPairs.length; i++) { keys[i] = kvPairs[i].key; }
+
+        return keys;
+    }
+
+    // Returns an array containing all values in the hashmap
+    function values() {
+
+        // Array of kv pair objects {key, value}
+        let kvPairs = _getKvPairs();
+
+        // Array of values
+        let values = [];
+
+        // Extract just the values to the values array
+        for (let i=0; i<kvPairs.length; i++) { values[i] = kvPairs[i].value; }
+
+        return values;
+    }
+
+    // Returns an array containing all key-value pairs [key, value] in the hashmap
+    function entries() {
+
+        // Array of kv pair objects {key, value}
+        let kvPairObjs = _getKvPairs();
+
+        // Array of kvPairs in list format [key, value] for easier printing to console
+        let kvPairs = [];
+
+        // Convert objects to array format
+        for (let i=0; i<kvPairObjs.length; i++) { kvPairs[i] = [kvPairObjs[i].key, kvPairObjs[i].value]; }
+
+        return kvPairs;
+    }
+
     // Initialise hashmap
     _map = _createHashMap();
 
-    return { set, get, has, remove, length, clear };
+    return { set, get, has, remove, length, clear, keys, values, entries };
 
 }
 
