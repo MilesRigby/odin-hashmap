@@ -124,7 +124,7 @@ const HashMap = () => {
         // Determine the hash for the requested key
         let hash = _hash(key);
 
-        // Get the bucket the hash refers to, and its head node
+        // Get the bucket the hash refers to
         let bucket = _accessBucket(hash);
 
         // Find the bucket node with the requested key, if it exists
@@ -139,7 +139,7 @@ const HashMap = () => {
         // Determine the hash for the requested key
         let hash = _hash(key);
 
-        // Get the bucket the hash refers to, and its head node
+        // Get the bucket the hash refers to
         let bucket = _accessBucket(hash);
 
         // Find the bucket node with the requested key, if it exists
@@ -179,10 +179,32 @@ const HashMap = () => {
     // Checks if a key exists in the hashmap by checking if a node containing the key exists (_getNodeByKey() does not return null)
     function has(key) { return (_getNodeByKey(key) !== null); }
 
+    // Removes a key-value pair by key, returning whether the key was in the hash map to begin with
+    function remove(key) {
+
+        // Determine the hash for the requested key
+        let hash = _hash(key);
+
+        // Get the bucket the hash refers to
+        let bucket = _accessBucket(hash);
+
+        // Find the node associated with the requested key for deletion
+        let node = _searchBucketByKey(bucket, key);
+
+        // Return false if no value is found
+        if (node === null) { return false; }
+
+        // Delete the node containing the key-value pair from the bucket
+        bucket.removeAt(bucket.find(node.value));
+
+        return true;
+
+    }
+
     // Initialise hashmap
     _map = _createHashMap();
 
-    return { set, get, has };
+    return { set, get, has, remove };
 
 }
 

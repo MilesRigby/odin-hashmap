@@ -147,7 +147,7 @@ const createLinkedList = () => {
         for ( let i = 0; i < _size; i++ ) {
 
             // If the current node has the value, return the index, i
-            if ( currentNode.value === value ) { return i; }
+            if ( currentNode.value == value ) { return i; }
 
             // Otherwise, increment current index and move to next node
             currentNode = currentNode.next;
