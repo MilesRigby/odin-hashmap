@@ -74,6 +74,8 @@ console.log(
     map.has("Nmr"),
 );
 
+console.log(map.length());
+
 console.log(
     map.remove("Number"),
     map.remove("Number"),
@@ -91,6 +93,8 @@ console.log(
     map.remove("umber"),
 )
 
+console.log(map.length());
+
 console.log(
     map.remove("mr"),
     map.remove("mb"),
@@ -98,6 +102,8 @@ console.log(
     map.remove("br"),
     map.remove("Ne"),
 );
+
+console.log(map.length());
 
 console.log(
     map.get("Number"),

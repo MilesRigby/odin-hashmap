@@ -9,6 +9,9 @@ const HashMap = () => {
     let _capacity = 2
     let _used = 0;
 
+    // Current number of stored keys in the hashmap
+    let _length = 0;
+
     // calculate the loadFactor as the proportion of buckets containing >0 elements
     const _loadFactor = () => { return _used/_capacity; }
 
@@ -33,8 +36,9 @@ const HashMap = () => {
         // return immediately if not enough buckets have elements
         if ( _loadFactor() < _loadLimit ) { return; }
 
-        // reset _used to 0
+        // reset _used and _length to 0
         _used = 0;
+        _length = 0;
 
         // Set up list of all key-value pairs
         let kvPairs = [];
@@ -155,11 +159,15 @@ const HashMap = () => {
                 value: value
             });
 
+            // Increase the tracked length of the hashmap - the number of key-value pairs in it
+            _length++;
+
             // If the bucket was previously empty, increase _used by 1 - a new bucket is now in use - and resize if needed
             if ( bucket.size() === 1 ) { 
                 _used++;
                 checkResize();
             }
+
         }
 
     }
@@ -197,14 +205,20 @@ const HashMap = () => {
         // Delete the node containing the key-value pair from the bucket
         bucket.removeAt(bucket.find(node.value));
 
+        // Decrease tracked length of the hashmap
+        _length--;
+
         return true;
 
     }
 
+    // Returns the length of the hashmap
+    function length() { return _length; }
+
     // Initialise hashmap
     _map = _createHashMap();
 
-    return { set, get, has, remove };
+    return { set, get, has, remove, length };
 
 }
 
