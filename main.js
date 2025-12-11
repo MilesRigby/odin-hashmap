@@ -134,3 +134,7 @@ console.log(
     map.get("Nmbr"),
     map.get("Nmbe"),
 );
+
+map.clear();
+
+console.log(map.length());

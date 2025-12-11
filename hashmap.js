@@ -5,8 +5,11 @@ const HashMap = () => {
     // The hashmap
     let _map;
 
+    // Limit how small the number of buckets in the hashmap can be
+    let _minimumCapacity = 16;
+
     // Current number of buckets in the hashmap and number of filled buckets
-    let _capacity = 2
+    let _capacity = _minimumCapacity;
     let _used = 0;
 
     // Current number of stored keys in the hashmap
@@ -137,7 +140,6 @@ const HashMap = () => {
     }
 
     // Adds a key-value pair to the hashmap, or replaces the value of an existing key
-    // !!! NEEDS UPDATE to resize map on high load factor !!!
     function set(key, value) {
 
         // Determine the hash for the requested key
@@ -215,10 +217,20 @@ const HashMap = () => {
     // Returns the length of the hashmap
     function length() { return _length; }
 
+    // Clears the hashmap of all values, reverting to an empty hashmap of default size
+    function clear() {
+        _capacity = _minimumCapacity;
+        _used = 0
+        _length = 0;
+
+        // Reset hashmap to a blank hashmap of default size
+        _map = _createHashMap();
+    }
+
     // Initialise hashmap
     _map = _createHashMap();
 
-    return { set, get, has, remove, length };
+    return { set, get, has, remove, length, clear };
 
 }
 
