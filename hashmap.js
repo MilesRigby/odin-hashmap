@@ -272,7 +272,7 @@ const HashMap = () => {
         // Array of kv pair objects {key, value}
         let kvPairObjs = _getKvPairs();
 
-        // Array of kvPairs in list format [key, value] for easier printing to console
+        // Array of kvPairs in list format [key, value]
         let kvPairs = [];
 
         // Convert objects to array format
